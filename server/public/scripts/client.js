@@ -5,13 +5,13 @@ let operator = ""
 function onReady() {
     console.log('jQuery is loaded!');
 
-    getPreviousMathAnswers();
+    // getPreviousMathAnswers();
 
     // $('#plus-btn').on('click', operatorPlus);
     // $('#minus-btn').on('click', operatorMinus);
     // $('#multiply-btn').on('click', operatorMultiply);
     // $('#divide-btn').on('click', operatorDivide);
-    $('#operator-btn').on('click', operatorSelection)
+    $('.operator-btn').on('click', operatorSelection)
 
     $('#equals-btn').on('click', solveMathEquation);
     $('#clear-inputs-btn').on('click', clearAllInputs);
@@ -93,10 +93,9 @@ function render(response) {
 
 
 // Creating a different on-click for each type of operation button.
-function operatorSelection(event){
-    event.preventDefault();
-    $(this).val();
-    console.log($(this).val())
+function operatorSelection(){
+    operator = $(this).val()
+    console.log('Operator selected: ', operator)
 }
 // function operatorPlus(event) {
 //     event.preventDefault()
