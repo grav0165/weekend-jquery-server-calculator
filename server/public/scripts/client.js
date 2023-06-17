@@ -12,20 +12,21 @@ function onReady() {
     $('#mutliply-btn').on('click', operatorMultiply);
     $('#divide-btn').on('click', operatorDivide);
     $('#equals-btn').on('click', solveMathEquation);
+    $('#clear-inputs-btn').on('click', clearAllInputs);
 
 
 }
 
 
 // Created get function to request from server any saved information
-// TODO - ADD RENDER TO getPreviousMathAnswers
+// ✅TODO - ADD RENDER TO getPreviousMathAnswers
 function getPreviousMathAnswers() {
     $.ajax({
         method: 'GET',
         url: '/savedPreviousMathAnswers'
     }).then(function(response){
         console.log('getPreviousMathAnswers function!', response)
-        // INSERT RENDER FUNCTION HERE;
+        render(response);
     }).catch(function(error){
         alert('Uh oh! You have an error!');
         console.log('Error server', error);
@@ -62,6 +63,19 @@ function solveMathEquation(event) {
     $('#var-b-input').val('');
 }
 
+function render(response) {
+    console.log('Render is running');
+    $('#math-history-results').remove();
+    for(let i = 0; i < response.length; i++) {
+        $('#math-history-results').append(`
+            <li>
+                ${response.varA} ${response.operatorNotation} ${response.varB} = ${response.answer}
+            </li>
+        `)
+    }
+
+}
+
 
 // Creating a different on-click for each type of operation button.
 function operatorPlus() {
@@ -82,5 +96,10 @@ function operatorMultiply(){
 function operatorDivide() {
     operator = "divide";
     console.log('Division selected')
+}
+
+function clearAllInputs(){
+    $('#var-a-input').val('');
+    $('#var-b-input').val('');
 }
 
