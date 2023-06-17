@@ -10,7 +10,25 @@
     <title>Online Calculator</title>
 </head>
 <body>
-    <form id="input-section"></form>
+    <h1>Server Side Calculator</h1>
+    <br>
+    <h3>Please input your variables</h3>
+    <form id="input-section">
+        <input type="text" id="var-a-input" placeholder="Insert Number" />
+        <button id="plus-btn">+</button>
+        <button id="minus-btn">-</button>
+        <button id="multiply-btn">*</button>
+        <button id="divide-btn">/</button>
+        <input type="text" id="var-b-input" placeholder="Insert Number" />
+        <button id="equals-btn">=</button>
+        <button id="clear-inputs-btn">C</button>
+    </form>
+    <p>
+        <div id="math-result"></div>
+    </p>
+    <p>
+        <ul id="math-history-results"></ul>
+    </p>
     
 </body>
 </html>
