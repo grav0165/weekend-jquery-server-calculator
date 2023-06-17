@@ -9,8 +9,9 @@ function onReady() {
 
     $('#plus-btn').on('click', operatorPlus);
     $('#minus-btn').on('click', operatorMinus);
-    $('#mutliply-btn').on('click', operatorMultiply);
+    $('#multiply-btn').on('click', operatorMultiply);
     $('#divide-btn').on('click', operatorDivide);
+
     $('#equals-btn').on('click', solveMathEquation);
     $('#clear-inputs-btn').on('click', clearAllInputs);
 
@@ -37,26 +38,33 @@ function solveMathEquation(event) {
     console.log('in solveMathEquation');
     // Preventing default form functions in HTML
     event.preventDefault();
+    let input1 = $('#var-a-input').val();
+    let input2 = $('#var-b-input').val();
     // creating object to package and send to server
     let mathObjectToSend = {
-        varA: $('#var-a-input').val(),
-        varB: $('#var-b-input').val(),
+        varA: input1,
+        varB: input2,
         operatorNotation: operator
     }
-    if(mathObjectToSend.varA === nil || mathObjectToSend.varB === nil) {
-        console.log('Error! Please enter at least one variable');
-    } else {
+    if(mathObjectToSend.varA || mathObjectToSend.varB) {
+    
         $.ajax({
             method: 'POST',
             url: '/savedPreviousMathAnswers',
             data: mathObjectToSend
         }).then(function(response) {
-            console.log('Success!', repsonse);
+            console.log('Success!', response);
             getPreviousMathAnswers();
         }).catch(function(error) {
             alert('Uh Oh! You have an error!');
             console.log('Error with post', error);
         })
+    } else if(operator == ""){
+        console.log('Error! No operator is selected!');
+        $('#math-result').append('Please select an math function to continue');
+    } else {
+        console.log('Error! Please enter at least one variable');
+        $('#math-result').append('Please input two numbers')
     }
     // Creating call to empty both input blocks
     $('#var-a-input').val('');
@@ -65,7 +73,7 @@ function solveMathEquation(event) {
 
 function render(response) {
     console.log('Render is running');
-    $('#math-history-results').remove();
+    // $('#math-history-results').remove();
     for(let i = 0; i < response.length; i++) {
         $('#math-history-results').append(`
             <li>
@@ -78,22 +86,26 @@ function render(response) {
 
 
 // Creating a different on-click for each type of operation button.
-function operatorPlus() {
+function operatorPlus(event) {
+    event.preventDefault()
     operator = "plus";
     console.log('Addition selected')
 }
 
-function operatorMinus(){
+function operatorMinus(event){
+    event.preventDefault()
     operator = "minus";
     console.log('Subtraction selected')
 }
 
-function operatorMultiply(){
+function operatorMultiply(event) {
+    event.preventDefault()
     operator = "multiply";
     console.log('Multiplication selected')
 }
 
-function operatorDivide() {
+function operatorDivide(event) {
+    event.preventDefault()
     operator = "divide";
     console.log('Division selected')
 }
