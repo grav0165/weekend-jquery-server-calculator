@@ -24,7 +24,7 @@ function onReady() {
 function getPreviousMathAnswers() {
     $.ajax({
         method: 'GET',
-        url: '/savedPreviousMathAnswers'
+        url: '/savedAnswers'
     }).then(function(response){
         console.log('getPreviousMathAnswers function!', response)
         render(response);
@@ -50,7 +50,7 @@ function solveMathEquation(event) {
     
         $.ajax({
             method: 'POST',
-            url: '/savedPreviousMathAnswers',
+            url: '/savedAnswers',
             data: mathObjectToSend
         }).then(function(response) {
             console.log('Success!', response);
@@ -73,13 +73,19 @@ function solveMathEquation(event) {
 
 function render(response) {
     console.log('Render is running');
-    // $('#math-history-results').remove();
-    for(let i = 0; i < response.length; i++) {
+    $('#math-history-results').empty();
+    for(let i=response.length-1; i >= 0; i--) {
+        let item = response[i];
         $('#math-history-results').append(`
             <li>
-                ${response.varA} ${response.operatorNotation} ${response.varB} = ${response.answer}
+                ${item.varA} ${item.operatorNotation} ${item.varB} = ${item.answer}
             </li>
         `)
+    for(let i=0; i < response.length; i++){
+        item = response[i];
+        $('#math-result').empty();
+        $('#math-result').append(`${item.answer}`)
+    }
     }
 
 }
@@ -88,25 +94,25 @@ function render(response) {
 // Creating a different on-click for each type of operation button.
 function operatorPlus(event) {
     event.preventDefault()
-    operator = "plus";
+    operator = "+";
     console.log('Addition selected')
 }
 
 function operatorMinus(event){
     event.preventDefault()
-    operator = "minus";
+    operator = "-";
     console.log('Subtraction selected')
 }
 
 function operatorMultiply(event) {
     event.preventDefault()
-    operator = "multiply";
+    operator = "*";
     console.log('Multiplication selected')
 }
 
 function operatorDivide(event) {
     event.preventDefault()
-    operator = "divide";
+    operator = "/";
     console.log('Division selected')
 }
 

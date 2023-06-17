@@ -2,13 +2,13 @@ console.log('Hello from mathSolver.js');
 
 function mathSovler(x, y, z) {
     let answer = 0;
-    if ( z === "plus" ) {
+    if ( z === "+" ) {
         answer = x + y;
-    } else if( z === "minus" ) {
+    } else if( z === "-" ) {
         answer = x - y;
-    } else if( z === "multiply" ) {
+    } else if( z === "*" ) {
         answer = x * y;
-    } else if( z === "divide" ) {
+    } else if( z === "/" ) {
         answer = x / y;
     }
 
