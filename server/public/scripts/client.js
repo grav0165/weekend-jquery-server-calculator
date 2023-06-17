@@ -5,7 +5,7 @@ let operator = ""
 function onReady() {
     console.log('jQuery is loaded!');
 
-    // getPreviousMathAnswers();
+    getPreviousMathAnswers();
 
     // $('#plus-btn').on('click', operatorPlus);
     // $('#minus-btn').on('click', operatorMinus);
