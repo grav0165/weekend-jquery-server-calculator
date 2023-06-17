@@ -1,12 +1,10 @@
 $(document).ready(onReady);
 
 let operator = "";
-let numberVal = "";
-let numberVal1 = "";
 let input1 = "";
 let input2 = "";
-let fullstring = ""
-let inputOneLocked = false;
+let numberConcat = "";
+
 
 function onReady() {
     console.log('jQuery is loaded!');
@@ -46,7 +44,6 @@ function solveMathEquation(event) {
     console.log('in solveMathEquation');
     // Preventing default form functions in HTML
     event.preventDefault();
-    numberVal = input2;
     console.log('Input 2 locked in: ', input2)
     // creating object to package and send to server
     let mathObjectToSend = {
@@ -97,35 +94,39 @@ function render(response) {
 }
 
 function numberWrite() {
-    if(inputOneLocked) {
+    // Display number clicked to DOM
+        // Concat to any prior numbers already in DOM
+
+    // Save to a variable which will become input1
+
+    // Switch to variable input2, after operatorSelected
+    if(operator) {
         input2 += $(this).val();
-        $('#var-a-input').val(numberVal += input2);
+        console.log('Input 2 is: ', input2)
+        numberConcat += $(this).val()
+        console.log('numbers concat together as ', numberConcat)
+
+        $('#var-a-input').val(numberConcat)
     } else {
-        numberVal += $(this).val();
-        console.log(numberVal);
-        $('#var-a-input').val(numberVal)
+        numberConcat += $(this).val()
+        console.log('Input 1 is: ', numberConcat)
+        $('#var-a-input').val(numberConcat)    
     }
+    
 }
-
-
 
 
 // Creating a different on-click for each type of operation button.
 function operatorSelection(){
-    input1 = numberVal;
-    numberVal += $(this).val();
+    // save operator section to a variable operator
     operator = $(this).val();
-    $('#var-a-input').val(numberVal)
-    console.log('Operator selected: ', operator);
-    console.log('Input 1 value locked in: ', input1); 
-    inputOneLocked = true;
-
+    // concat to DOM
+    input1 = numberConcat;
+    numberConcat += operator;
+    $('#var-a-input').val(numberConcat)
 }
 
-function numberRender() {
-    fullstring += numberVal;
-    $('#var-a-input').val(numberVal)
-}
+
 // function operatorPlus(event) {
 //     event.preventDefault()
 //     operator = "+";
@@ -154,8 +155,7 @@ function clearAllInputs(){
     $('#var-a-input').val('');
     input1 = "";
     input2 = "";
-    numberVal = "";
-    numberVal1 = "";
     operator = "";
+    numberConcat = "";
 }
 

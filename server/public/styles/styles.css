@@ -1,0 +1,19 @@
+body {
+    background-color: #38423B;
+    color: #3F5E5A;
+}
+
+.operator-btn, #equals-btn, .number-btn {
+    text-align: center;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    min-width: 2em;
+    min-height: 1.5em;
+    margin-top: 1px;
+    padding: 5px;
+}
+
+p {
+    padding: 1px;
+}
