@@ -7,10 +7,11 @@ function onReady() {
 
     getPreviousMathAnswers();
 
-    $('#plus-btn').on('click', operatorPlus);
-    $('#minus-btn').on('click', operatorMinus);
-    $('#multiply-btn').on('click', operatorMultiply);
-    $('#divide-btn').on('click', operatorDivide);
+    // $('#plus-btn').on('click', operatorPlus);
+    // $('#minus-btn').on('click', operatorMinus);
+    // $('#multiply-btn').on('click', operatorMultiply);
+    // $('#divide-btn').on('click', operatorDivide);
+    $('.operator-btn').on('click', operatorSelection)
 
     $('#equals-btn').on('click', solveMathEquation);
     $('#clear-inputs-btn').on('click', clearAllInputs);
@@ -92,29 +93,33 @@ function render(response) {
 
 
 // Creating a different on-click for each type of operation button.
-function operatorPlus(event) {
-    event.preventDefault()
-    operator = "+";
-    console.log('Addition selected')
+function operatorSelection(){
+    operator = $(this).val()
+    console.log('Operator selected: ', operator)
 }
+// function operatorPlus(event) {
+//     event.preventDefault()
+//     operator = "+";
+//     console.log('Addition selected')
+// }
 
-function operatorMinus(event){
-    event.preventDefault()
-    operator = "-";
-    console.log('Subtraction selected')
-}
+// function operatorMinus(event){
+//     event.preventDefault()
+//     operator = "-";
+//     console.log('Subtraction selected')
+// }
 
-function operatorMultiply(event) {
-    event.preventDefault()
-    operator = "*";
-    console.log('Multiplication selected')
-}
+// function operatorMultiply(event) {
+//     event.preventDefault()
+//     operator = "*";
+//     console.log('Multiplication selected')
+// }
 
-function operatorDivide(event) {
-    event.preventDefault()
-    operator = "/";
-    console.log('Division selected')
-}
+// function operatorDivide(event) {
+//     event.preventDefault()
+//     operator = "/";
+//     console.log('Division selected')
+// }
 
 function clearAllInputs(){
     $('#var-a-input').val('');
