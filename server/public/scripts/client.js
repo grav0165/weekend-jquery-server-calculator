@@ -1,6 +1,12 @@
 $(document).ready(onReady);
 
-let operator = ""
+let operator = "";
+let numberVal = "";
+let numberVal1 = "";
+let input1 = "";
+let input2 = "";
+let fullstring = ""
+let inputOneLocked = false;
 
 function onReady() {
     console.log('jQuery is loaded!');
@@ -12,6 +18,7 @@ function onReady() {
     // $('#multiply-btn').on('click', operatorMultiply);
     // $('#divide-btn').on('click', operatorDivide);
     $('.operator-btn').on('click', operatorSelection)
+    $('.number-btn').on('click', numberWrite)
 
     $('#equals-btn').on('click', solveMathEquation);
     $('#clear-inputs-btn').on('click', clearAllInputs);
@@ -39,8 +46,8 @@ function solveMathEquation(event) {
     console.log('in solveMathEquation');
     // Preventing default form functions in HTML
     event.preventDefault();
-    let input1 = $('#var-a-input').val();
-    let input2 = $('#var-b-input').val();
+    numberVal = input2;
+    console.log('Input 2 locked in: ', input2)
     // creating object to package and send to server
     let mathObjectToSend = {
         varA: input1,
@@ -68,8 +75,7 @@ function solveMathEquation(event) {
         $('#math-result').append('Please input two numbers')
     }
     // Creating call to empty both input blocks
-    $('#var-a-input').val('');
-    $('#var-b-input').val('');
+    clearAllInputs();
 }
 
 function render(response) {
@@ -88,14 +94,37 @@ function render(response) {
         $('#math-result').append(`${item.answer}`)
     }
     }
-
 }
+
+function numberWrite() {
+    if(inputOneLocked) {
+        input2 += $(this).val();
+        $('#var-a-input').val(numberVal += input2);
+    } else {
+        numberVal += $(this).val();
+        console.log(numberVal);
+        $('#var-a-input').val(numberVal)
+    }
+}
+
+
 
 
 // Creating a different on-click for each type of operation button.
 function operatorSelection(){
-    operator = $(this).val()
-    console.log('Operator selected: ', operator)
+    input1 = numberVal;
+    numberVal += $(this).val();
+    operator = $(this).val();
+    $('#var-a-input').val(numberVal)
+    console.log('Operator selected: ', operator);
+    console.log('Input 1 value locked in: ', input1); 
+    inputOneLocked = true;
+
+}
+
+function numberRender() {
+    fullstring += numberVal;
+    $('#var-a-input').val(numberVal)
 }
 // function operatorPlus(event) {
 //     event.preventDefault()
@@ -123,6 +152,10 @@ function operatorSelection(){
 
 function clearAllInputs(){
     $('#var-a-input').val('');
-    $('#var-b-input').val('');
+    input1 = "";
+    input2 = "";
+    numberVal = "";
+    numberVal1 = "";
+    operator = "";
 }
 
