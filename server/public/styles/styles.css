@@ -1,7 +1,7 @@
 body {
     background-color: #f8d8f0;
     color: #090207;
-    text-align: center;
+  
     padding: 70px 0;
 }
 
@@ -74,7 +74,7 @@ h1 {
    -webkit-text-fill-color: transparent;
    animation: textclip 2s linear infinite;
    display: inline-block;
-       font-size: 190px;
+       font-size: 100px;
  }
  
  @keyframes textclip {
@@ -89,5 +89,6 @@ h1 {
     border-radius: 5px;
     width: 25%;
     text-align: center;
+    margin: auto;
 
 }
