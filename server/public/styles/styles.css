@@ -45,6 +45,18 @@ h1 {
     border-radius: 3px;
 }
 
+.clear-history-btn {
+    text-align: center;
+    background-color: #6b142c;
+    border: none;
+    color: white;
+    border-radius: 3px;
+    min-height: 3em;
+    padding: 4px;
+    margin-top: 1px;
+
+}
+
 .button-array {
     margin-bottom: 0.1em;
     margin-top: 0.1em;
