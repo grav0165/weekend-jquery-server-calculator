@@ -21,6 +21,8 @@ function onReady() {
     $('#equals-btn').on('click', solveMathEquation);
     $('#clear-inputs-btn').on('click', clearAllInputs);
 
+    $('.clear-history-btn').on('click', clearHistory);
+
 
 }
 
@@ -150,6 +152,21 @@ function operatorSelection(){
 //     operator = "/";
 //     console.log('Division selected')
 // }
+function clearHistory(event) {
+    event.preventDefault();
+    console.log('Clearing history')
+    $.ajax({
+        url: '/savedAnswers',
+        type: 'DELETE',
+        success: function(result) {
+            console.log("Success deleting history")
+        }
+        
+    });
+    getPreviousMathAnswers();
+    $('#math-result').remove();
+}
+
 
 function clearAllInputs(){
     $('#var-a-input').val('');

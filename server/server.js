@@ -36,6 +36,10 @@ app.post('/savedAnswers', function(req,res) {
     res.sendStatus(200);
 })
 
+app.delete('/savedAnswers', function(req, res) {
+    savedAnswers.length = 0;
+    res.sendStatus(204); 
+  });
 
 
 
